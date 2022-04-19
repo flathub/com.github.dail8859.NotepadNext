@@ -26,6 +26,7 @@ modules:
         - make install INSTALL_ROOT=/app
       post-install:
         - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
+        - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
       sources:
         - type: git
           url: https://github.com/dail8859/NotepadNext.git
