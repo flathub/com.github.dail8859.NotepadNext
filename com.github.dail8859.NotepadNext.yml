@@ -9,10 +9,10 @@ command: NotepadNext
 
 finish-args:
     - --share=ipc
-    - --socket=x11
+    - --socket=wayland
+    - --socket=fallback-x11
     - --device=dri
     - --filesystem=home
-    - --env=QT_QPA_PLATFORM=xcb
 
 modules:
     - name: NotepadNext
@@ -30,5 +30,4 @@ modules:
       sources:
         - type: git
           url: https://github.com/dail8859/NotepadNext.git
-          tag: v0.5
-          commit: bd6ca110d8219bde7467866e0d67da53353c69c8
+          commit: 91949c7d6a62734713d44f35394031d05bbbf710
