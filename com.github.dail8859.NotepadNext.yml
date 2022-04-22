@@ -30,4 +30,4 @@ modules:
       sources:
         - type: git
           url: https://github.com/dail8859/NotepadNext.git
-          commit: 91949c7d6a62734713d44f35394031d05bbbf710
+          commit: 283691cf5c62eedc4d591529adb3446cab4963db
