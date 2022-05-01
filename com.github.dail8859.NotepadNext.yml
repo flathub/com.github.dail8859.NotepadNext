@@ -32,3 +32,6 @@ modules:
           url: https://github.com/dail8859/NotepadNext.git
           tag: v0.5.1
           commit: 9d19014e770b5c04c634e233f8d413ec631c1646
+          x-checker-data:
+            type: git
+            tag-pattern: ^v([\d.]+)$
