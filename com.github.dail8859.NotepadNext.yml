@@ -19,15 +19,15 @@ modules:
       buildsystem: simple
       build-commands:
         # fix install prefix
-        - sed -i -e 's|/usr/bin|/bin|g' src/NotepadNext/NotepadNext.pro
-        - sed -i -e 's|/usr/share/|/share/|g' src/NotepadNext/NotepadNext.pro
+        #- sed -i -e 's|/usr/bin|/bin|g' src/NotepadNext/NotepadNext.pro
+        #- sed -i -e 's|/usr/share/|/share/|g' src/NotepadNext/NotepadNext.pro
         - qmake src/NotepadNext.pro
         - make -j $FLATPAK_BUILDER_N_JOBS
-        - make install INSTALL_ROOT=/app
+        - make install INSTALL_ROOT=/ PREFIX=/app
       post-install:
         - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
         - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
       sources:
         - type: git
           url: https://github.com/dail8859/NotepadNext.git
-          commit: 283691cf5c62eedc4d591529adb3446cab4963db
+          commit: f4ec25ba9595ce9e2a6425728d1500701110262d
