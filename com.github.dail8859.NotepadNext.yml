@@ -8,30 +8,30 @@ rename-desktop-file: NotepadNext.desktop
 command: NotepadNext
 
 finish-args:
-    - --share=ipc
-    - --socket=wayland
-    - --socket=fallback-x11
-    - --device=dri
-    - --filesystem=home
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=home
 
 modules:
-    - name: NotepadNext
-      buildsystem: simple
-      build-commands:
-        # fix install prefix
-        - sed -i -e 's|/usr/bin|/bin|g' src/NotepadNext/NotepadNext.pro
-        - sed -i -e 's|/usr/share/|/share/|g' src/NotepadNext/NotepadNext.pro
-        - qmake src/NotepadNext.pro
-        - make -j $FLATPAK_BUILDER_N_JOBS
-        - make install INSTALL_ROOT=/app
-      post-install:
-        - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
-        - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
-      sources:
-        - type: git
-          url: https://github.com/dail8859/NotepadNext.git
-          tag: v0.5.1
-          commit: 9d19014e770b5c04c634e233f8d413ec631c1646
-          x-checker-data:
-            type: git
-            tag-pattern: ^v([\d.]+)$
+  - name: NotepadNext
+    buildsystem: simple
+    build-commands:
+      # fix install prefix
+      - sed -i -e 's|/usr/bin|/bin|g' src/NotepadNext/NotepadNext.pro
+      - sed -i -e 's|/usr/share/|/share/|g' src/NotepadNext/NotepadNext.pro
+      - qmake src/NotepadNext.pro
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install INSTALL_ROOT=/app
+    post-install:
+      - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
+      - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
+    sources:
+      - type: git
+        url: https://github.com/dail8859/NotepadNext.git
+        tag: v0.5.1
+        commit: 9d19014e770b5c04c634e233f8d413ec631c1646
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
