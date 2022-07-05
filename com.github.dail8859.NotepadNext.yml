@@ -22,13 +22,14 @@ modules:
       - make -j $FLATPAK_BUILDER_N_JOBS
       - make install INSTALL_ROOT=/
     post-install:
-      - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
+      - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml
+        -t /app/share/metainfo
       - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.5.2
-        commit: 3704917b5f9f7bff9d0e2690303ea7f9a13cfc18
+        tag: v0.5.3
+        commit: 995cff1f8f1bfcd1aefdf3fa328bc3c631994602
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
