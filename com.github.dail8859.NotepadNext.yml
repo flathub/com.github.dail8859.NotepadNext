@@ -18,7 +18,7 @@ modules:
     - name: NotepadNext
       buildsystem: simple
       build-commands:
-        - qmake PREFIX=/app src/NotepadNext.pro
+        - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
         - make -j $FLATPAK_BUILDER_N_JOBS
         - make install INSTALL_ROOT=/
       post-install:
@@ -27,4 +27,4 @@ modules:
       sources:
         - type: git
           url: https://github.com/dail8859/NotepadNext.git
-          commit: f4ec25ba9595ce9e2a6425728d1500701110262d
+          commit: 345405bb6ef25a4faff2ea9e354c516b8aa516bd
