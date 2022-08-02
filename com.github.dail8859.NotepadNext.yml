@@ -18,7 +18,7 @@ modules:
   - name: NotepadNext
     buildsystem: simple
     build-commands:
-      - qmake PREFIX=/app src/NotepadNext.pro
+      - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
       - make -j $FLATPAK_BUILDER_N_JOBS
       - make install INSTALL_ROOT=/
     post-install:
