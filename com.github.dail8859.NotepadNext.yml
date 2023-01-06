@@ -19,7 +19,6 @@ modules:
   # See also: https://invent.kde.org/packaging/flatpak-kde-runtime/-/issues/26
   - name: qt6-core5compat
     buildsystem: cmake-ninja
-    builddir: true
     sources:
       - type: archive
         url: https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qt5compat-everywhere-src-6.4.0.tar.xz
