@@ -15,6 +15,18 @@ finish-args:
   - --filesystem=home
 
 modules:
+  # Needed for Qt 6 until it is available in the runtime soonTM
+  # See also: https://invent.kde.org/packaging/flatpak-kde-runtime/-/issues/26
+  - name: qt6-core5compat
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://download.qt.io/official_releases/qt/6.4/6.4.1/submodules/qt5compat-everywhere-src-6.4.1.tar.xz
+        sha256: d4a533ee45d6341b9eb402e69bc21909eeeeda2b2d29a6c715b31c3ec12fd031
+    post-install:
+      - ln -sr /app/lib/${FLATPAK_ARCH}-linux-gnu/libQt6Core5Compat.so* -t /app/lib
+
   - name: NotepadNext
     buildsystem: simple
     build-commands:
