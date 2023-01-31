@@ -1,6 +1,6 @@
 app-id: com.github.dail8859.NotepadNext
 runtime: org.kde.Platform
-runtime-version: "5.15-21.08"
+runtime-version: 6.4
 sdk: org.kde.Sdk
 
 rename-icon: NotepadNext
@@ -8,23 +8,28 @@ rename-desktop-file: NotepadNext.desktop
 command: NotepadNext
 
 finish-args:
-    - --share=ipc
-    - --socket=wayland
-    - --socket=fallback-x11
-    - --device=dri
-    - --filesystem=home
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=home
 
 modules:
-    - name: NotepadNext
-      buildsystem: simple
-      build-commands:
-        - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
-        - make -j $FLATPAK_BUILDER_N_JOBS
-        - make install INSTALL_ROOT=/
-      post-install:
-        - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
-        - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
-      sources:
-        - type: git
-          url: https://github.com/dail8859/NotepadNext.git
-          commit: 345405bb6ef25a4faff2ea9e354c516b8aa516bd
+  - name: NotepadNext
+    buildsystem: simple
+    build-commands:
+      - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install INSTALL_ROOT=/
+    post-install:
+      - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml
+        -t /app/share/metainfo
+      - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
+    sources:
+      - type: git
+        url: https://github.com/dail8859/NotepadNext.git
+        tag: v0.6
+        commit: 64bfec26374c45bde18e712a743d01580af25030
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
