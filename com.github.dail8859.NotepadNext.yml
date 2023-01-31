@@ -15,34 +15,6 @@ finish-args:
   - --filesystem=home
 
 modules:
-  # Needed for Qt 6 until it is available in the runtime soonTM
-  # See also: https://invent.kde.org/packaging/flatpak-kde-runtime/-/issues/26
-  - name: qt6-core5compat
-    buildsystem: cmake-ninja
-    sources:
-      - type: archive
-        url: https://download.qt.io/official_releases/qt/6.4/6.4.0/submodules/qt5compat-everywhere-src-6.4.0.tar.xz
-        sha256: 73475d0837f78246d509199f211a35c71fc36cccf64b3de258ebc6387194a4c0
-    post-install:
-      # shamelessly copied from https://github.com/flathub/org.profex_xrd.Profex/blob/b488035fc70f59ce6143a365fa883c4b9329322d/org.profex_xrd.Profex.yml#L37
-      - mv /app/mkspecs /app/lib
-      - ln -sr ${FLATPAK_DEST}/lib/${FLATPAK_ARCH}-linux-gnu/libQt*.so* -t ${FLATPAK_DEST}/lib/
-      - sed -i 's/\\([0-9]\\+\\.[0-9]\\+\\)\\.[0-9]\\+ ${_Qt6.*_FIND_VERSION_EXACT}/\\1/'
-        ${FLATPAK_DEST}/lib/${FLATPAK_ARCH}-linux-gnu/cmake/Qt6*/Qt6*Config.cmake
-      - sed -e 's@PATHS \"${CMAKE_CURRENT_LIST_DIR}/..\" NO_DEFAULT_PATH@PATHS \"${CMAKE_CURRENT_LIST_DIR}/..\"
-        \"/usr/lib/${CMAKE_CXX_LIBRARY_ARCHITECTURE}/cmake/\" NO_DEFAULT_PATH@' -i
-        ${FLATPAK_DEST}/lib/${FLATPAK_ARCH}-linux-gnu/cmake/Qt6*/Qt6*Config.cmake
-      - sed -e 's@\\($$QT_MODULE_BIN_BASE\\)@\\1 '${FLATPAK_DEST}'/bin @' -i ${FLATPAK_DEST}/lib/mkspecs/modules/*.pri
-      - sed -e 's@\\($$QT_MODULE_INCLUDE_BASE \\)@\\1'${FLATPAK_DEST}'/include @'
-        -i ${FLATPAK_DEST}/lib/mkspecs/modules/*.pri
-      - sed -e 's@$$QT_MODULE_INCLUDE_BASE/@'${FLATPAK_DEST}'/include/@g' -i ${FLATPAK_DEST}/lib/mkspecs/modules/*.pri
-      - sed -e 's@$$QT_MODULE_LIB_BASE@'${FLATPAK_DEST}'/lib@g' -i ${FLATPAK_DEST}/lib/mkspecs/modules/*.pri
-
-    cleanup:
-      - /include
-      - /mkspecs
-      - /modules
-
   - name: NotepadNext
     buildsystem: simple
     build-commands:
