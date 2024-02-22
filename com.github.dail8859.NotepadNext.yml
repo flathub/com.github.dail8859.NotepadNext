@@ -28,8 +28,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.6.4
-        commit: f43fdf9af0f7c153b9c938f111ccb4332d81f22a
+        tag: v0.7
+        commit: e14f8c9d6a73a936bf453251cb3bfdd4ed0f9279
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
