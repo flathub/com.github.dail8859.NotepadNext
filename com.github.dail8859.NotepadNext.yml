@@ -1,6 +1,6 @@
 app-id: com.github.dail8859.NotepadNext
 runtime: org.kde.Platform
-runtime-version: "6.5"
+runtime-version: '6.5'
 sdk: org.kde.Sdk
 
 rename-icon: NotepadNext
@@ -28,8 +28,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.7
-        commit: e14f8c9d6a73a936bf453251cb3bfdd4ed0f9279
+        tag: v0.8
+        commit: cb09765afa143baa510de3031b65494ac7183aa3
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
