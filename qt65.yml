@@ -44,16 +44,16 @@ modules:
         url: https://download.qt.io/archive/qt/6.6/6.6.2/submodules/qttools-everywhere-src-6.6.2.tar.xz
         sha256: e6d49e9f52111287f77878ecb8b708cce682f10b03ba2476d9247603bc6c4746
 
-#  - name: qt-shadertools
-#    buildsystem: cmake-ninja
-#    builddir: true
-#    config-opts:
-#      - -DQT_BUILD_EXAMPLES=OFF
-#      - -DQT_BUILD_TESTS=OFF
-#    sources:
-#      - type: archive
-#        url: https://download.qt.io/archive/qt/6.6/6.6.2/submodules/qtshadertools-everywhere-src-6.6.2.tar.xz
-#        sha256: 628bead7ff4e7f42cb910f47d2adefbdea0d8c71a0234baef8ca709bf467b92f
+  - name: qt-shadertools
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.6/6.6.2/submodules/qtshadertools-everywhere-src-6.6.2.tar.xz
+        sha256: 628bead7ff4e7f42cb910f47d2adefbdea0d8c71a0234baef8ca709bf467b92f
 
   - name: qtdeclarative
     buildsystem: cmake-ninja
