@@ -1,6 +1,6 @@
 # shamelessly copied from: 
 # https://github.com/flathub/io.emeric.watchflower/blob/master/io.emeric.watchflower.yml
-
+name: qt6.5
 cleanup:
   - /bin/__pypache__
   - /bin/rst*
