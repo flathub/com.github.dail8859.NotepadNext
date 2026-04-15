@@ -1,0 +1,137 @@
+# shamelessly copied from: 
+# https://github.com/flathub/io.emeric.watchflower/blob/master/io.emeric.watchflower.yml
+name: qt6.5
+cleanup:
+  - /bin/__pypache__
+  - /bin/rst*
+  - /include
+  - /lib/cmake
+  - /lib/cups
+  - /lib/pkgconfig
+  - /lib/python*
+  - /share/doc
+  - /share/man
+  - /share/zsh
+  - /src
+  - '*.a'
+  - '*.la'
+
+modules:
+  - name: qt-base
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtbase-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: 5d35f8f37dfb3dff387cce31725b3a363894e3b6ea9d86aa54d9e7fd34e1b888
+    cleanup:
+      - /bin
+
+  - name: qt-tools
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_PREFIX_PATH=/app
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qttools-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: 1c99dd8d3fd4044866a2d3d569ccd08e25ba28261d494f58b464fcfc18b719a8
+
+  - name: qt-shadertools
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtshadertools-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: e64e06f55612031b27ca1a0db1932dbdde48afed2ac3696ae0d003720996c567
+
+  - name: qtdeclarative
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_PREFIX_PATH=/app
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtdeclarative-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: dfa97413b07058796638fee0db9c0db20f155aba35e5e8f70c3eb1357539eb5d
+
+  - name: qtwayland
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtwayland-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: 3401fd004753b239272c1712cde0de323e2e3a68526025b96dd09aed383864c2
+    cleanup:
+      - /bin
+
+  - name: qtimageformats
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtimageformats-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: d4edcdb9c7b20737496117489f5be6b5b23f244a0b74635339e39704097753c5
+
+  - name: qtsvg
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtsvg-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: 7bebe5c5b63a6107027beecfa4dc1d8dd4837527040529a4c9d4159844c26061
+
+#  - name: qtconnectivity
+#    buildsystem: cmake-ninja
+#    config-opts:
+#      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+#      - -DQT_BUILD_EXAMPLES=OFF
+#      - -DQT_BUILD_TESTS=OFF
+#    sources:
+#      - type: archive
+#        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtconnectivity-everywhere-opensource-src-6.5.8.tar.xz
+#        sha256: 8b2bd9b43de414897be9011261f176836a8952bd7c07ebc35713d911a8a66ff8
+
+#  - name: qtcharts
+#    buildsystem: cmake-ninja
+#    config-opts:
+#      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+#      - -DQT_BUILD_EXAMPLES=OFF
+#      - -DQT_BUILD_TESTS=OFF
+#    sources:
+#      - type: archive
+#        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qtcharts-everywhere-opensource-src-6.5.8.tar.xz
+#        sha256: 2ce0cff263d775ce0a86827e62e50758fd6e15a3e06f887bfa1756922d925213
+
+  - name: qt5compat
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DQT_BUILD_EXAMPLES=OFF
+      - -DQT_BUILD_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.qt.io/archive/qt/6.5/6.5.8/src/submodules/qt5compat-everywhere-opensource-src-6.5.8.tar.xz
+        sha256: 89c0f4ddf385c5a9b75839d2ad696ca65bae5f10f1a6a9eeb451c2ae215330d0
