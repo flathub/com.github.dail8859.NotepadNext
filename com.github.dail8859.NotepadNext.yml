@@ -18,23 +18,40 @@ modules:
   - qt65.yml
 
   - name: NotepadNext
-    buildsystem: simple
-    build-commands:
-      - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - make install INSTALL_ROOT=/
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DAPP_DISTRIBUTION=Flatpak
     post-install:
-      - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml
-        -t /app/share/metainfo
+      - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml -t /app/share/metainfo
       - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.13
-        commit: cf7f9300359849ffa5c8f4383b31e22a84c5e658
+        tag: v0.14
+        commit: 0c63b760ae82bb0eabbf070030454bae9df9ab5b
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
 
-      - type: patch
-        path: scintilla-cstdint.patch
+      - type: archive
+        url: https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/archive/34b68d6eab1556cf851d24e033909332771f3dfe.tar.gz
+        sha256: 67bb5fc633eb477317d588045b08cc6a92fb4eff15754a0b7b85f09dff3c69a0
+        dest: .cpm-cache/ads/34b68d6eab1556cf851d24e033909332771f3dfe
+
+      - type: archive
+        url: https://github.com/alex-spataru/QSimpleUpdater/archive/8e7017f7fbdc2b4b1a26ed1eef9ebcba6a50639c.tar.gz
+        sha256: 74d09013a05f33359217fe238b624ddc04c4bb12402ae3c4f391df2049c49cf8
+        dest: .cpm-cache/QSimpleUpdater/8e7017f7fbdc2b4b1a26ed1eef9ebcba6a50639c
+
+      - type: archive
+        url: https://github.com/itay-grudev/SingleApplication/archive/494772e98cef0aa88124f154feb575cc60b08b38.tar.gz
+        sha256: e1a3625c3e60413847b1e74d2e2fabcabe5863686d26b16ee76f011f0521e535
+        dest: .cpm-cache/SingleApplication/494772e98cef0aa88124f154feb575cc60b08b38
+
+      - type: archive
+        url: https://github.com/editorconfig/editorconfig-core-qt/archive/ab62f0554abf2bbe4d45427b36a8b2f81ca7b4ab.tar.gz
+        sha256: 17d305ffa59647477217ed5b36db2c2ef0a9b279a5bc4b01de0dbc7282665ceb
+        dest: .cpm-cache/editorconfig_core_qt/ab62f0554abf2bbe4d45427b36a8b2f81ca7b4ab
+
+#      - type: patch
+#        path: scintilla-cstdint.patch
