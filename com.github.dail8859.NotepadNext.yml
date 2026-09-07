@@ -18,23 +18,51 @@ modules:
   - qt65.yml
 
   - name: NotepadNext
-    buildsystem: simple
-    build-commands:
-      - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - make install INSTALL_ROOT=/
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DAPP_DISTRIBUTION=Flatpak
+      # Hand CPM the pre-fetched deps so it never tries to clone at configure time.
+      # Paths are /run/build/<module-name>/<dest> — module name here is "NotepadNext".
+      - -DCPM_ads_SOURCE=/run/build/NotepadNext/subprojects/ads
+      - -DCPM_QSimpleUpdater_SOURCE=/run/build/NotepadNext/subprojects/QSimpleUpdater
+      - -DCPM_SingleApplication_SOURCE=/run/build/NotepadNext/subprojects/SingleApplication
+      - -DCPM_editorconfig_core_qt_SOURCE=/run/build/NotepadNext/subprojects/editorconfig-core-qt
     post-install:
+      # CMake installs the binary, .desktop and icon, but NOT the metainfo — add it here.
       - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml
         -t /app/share/metainfo
-      - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.13
-        commit: cf7f9300359849ffa5c8f4383b31e22a84c5e658
+        tag: v0.14
+        commit: 0c63b760ae82bb0eabbf070030454bae9df9ab5b
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+
+      # --- CPM dependencies, pinned to the tags/commits in thirdparty/CMakeLists.txt ---
+      - type: git
+        url: https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System.git
+        tag: 5.0.0
+        commit: 433b0c90b44d8f17d059204176ff6e0d6d3783e3
+        dest: subprojects/ads
+
+      - type: git
+        url: https://github.com/alex-spataru/QSimpleUpdater.git
+        commit: c5c136c0f79ca6423b0914a2676ae3d0e3811c5b
+        dest: subprojects/QSimpleUpdater
+
+      - type: git
+        url: https://github.com/itay-grudev/SingleApplication.git
+        tag: v3.5.6
+        commit: a218603d76a55dddb65b84f2b49ecaa8efc074ea
+        dest: subprojects/SingleApplication
+
+      - type: git
+        url: https://github.com/editorconfig/editorconfig-core-qt.git
+        commit: ab62f0554abf2bbe4d45427b36a8b2f81ca7b4ab
+        dest: subprojects/editorconfig-core-qt
 
       - type: patch
         path: scintilla-cstdint.patch
