@@ -1,0 +1,16 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -42,6 +42,12 @@ set(CMAKE_AUTORCC ON)
+ set(CMAKE_AUTORCC ON)
+ qt_standard_project_setup()
+
++# Use bundled dependencies for the Flathub build (no network access at build time).
++set(CPM_ads_SOURCE "${CMAKE_SOURCE_DIR}/thirdparty/ads")
++set(CPM_QSimpleUpdater_SOURCE "${CMAKE_SOURCE_DIR}/thirdparty/QSimpleUpdater")
++set(CPM_SingleApplication_SOURCE "${CMAKE_SOURCE_DIR}/thirdparty/SingleApplication")
++set(CPM_editorconfig_core_qt_SOURCE "${CMAKE_SOURCE_DIR}/thirdparty/editorconfig-core-qt")
++
+ set(CPM_SOURCE_CACHE "${CMAKE_SOURCE_DIR}/.cpm-cache" CACHE PATH "CPM source cache directory")
+
+ add_subdirectory(thirdparty)
