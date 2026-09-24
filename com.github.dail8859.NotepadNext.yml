@@ -23,6 +23,13 @@ modules:
       - -DAPP_DISTRIBUTION=Flatpak
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCMAKE_PREFIX_PATH=/app
+
+      # CPM offline cache
+      - -DCPM_ads_SOURCE=/run/build/NotepadNext/thirdparty/ads
+      - -DCPM_QSimpleUpdater_SOURCE=/run/build/NotepadNext/thirdparty/QSimpleUpdater
+      - -DCPM_SingleApplication_SOURCE=/run/build/NotepadNext/thirdparty/SingleApplication
+      - -DCPM_editorconfig_core_qt_SOURCE=/run/build/NotepadNext/thirdparty/editorconfig-core-qt
+
     post-install:
       - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml
         -t /app/share/metainfo
@@ -34,6 +41,7 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
+
       - type: git
         url: https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System.git
         commit: 34b68d6eab1556cf851d24e033909332771f3dfe
@@ -50,5 +58,3 @@ modules:
         url: https://github.com/editorconfig/editorconfig-core-qt.git
         commit: ab62f0554abf2bbe4d45427b36a8b2f81ca7b4ab
         dest: thirdparty/editorconfig-core-qt
-      - type: patch
-        path: no-cpm-download.patch
