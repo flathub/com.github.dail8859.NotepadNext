@@ -18,23 +18,43 @@ modules:
   - qt65.yml
 
   - name: NotepadNext
-    buildsystem: simple
-    build-commands:
-      - qmake PREFIX=/app src/NotepadNext.pro "DISTRIBUTION=Flatpak"
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - make install INSTALL_ROOT=/
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DAPP_DISTRIBUTION=Flatpak
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_PREFIX_PATH=/app
+
+      # CPM offline cache
+      - -DCPM_ads_SOURCE=/run/build/NotepadNext/thirdparty/ads
+      - -DCPM_QSimpleUpdater_SOURCE=/run/build/NotepadNext/thirdparty/QSimpleUpdater
+      - -DCPM_SingleApplication_SOURCE=/run/build/NotepadNext/thirdparty/SingleApplication
+      - -DCPM_editorconfig_core_qt_SOURCE=/run/build/NotepadNext/thirdparty/editorconfig-core-qt
+
     post-install:
       - install -D -m644 deploy/linux/com.github.dail8859.NotepadNext.metainfo.xml
         -t /app/share/metainfo
-      - cp -a /app/share/icons/hicolor/scalable/{mimetypes,apps}
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.13
-        commit: cf7f9300359849ffa5c8f4383b31e22a84c5e658
+        tag: v0.15
+        commit: fc4c807cf2b755b37d40de27cf29a5268c7c2fc5
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
 
-      - type: patch
-        path: scintilla-cstdint.patch
+      - type: git
+        url: https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System.git
+        commit: 023ce95934fecfd4cf5c672c9c404fabe0f54923
+        dest: thirdparty/ads
+      - type: git
+        url: https://github.com/alex-spataru/QSimpleUpdater.git
+        commit: c5c136c0f79ca6423b0914a2676ae3d0e3811c5b
+        dest: thirdparty/QSimpleUpdater
+      - type: git
+        url: https://github.com/itay-grudev/SingleApplication.git
+        commit: a218603d76a55dddb65b84f2b49ecaa8efc074ea
+        dest: thirdparty/SingleApplication
+      - type: git
+        url: https://github.com/editorconfig/editorconfig-core-qt.git
+        commit: ab62f0554abf2bbe4d45427b36a8b2f81ca7b4ab
+        dest: thirdparty/editorconfig-core-qt
