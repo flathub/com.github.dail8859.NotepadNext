@@ -36,23 +36,23 @@ modules:
     sources:
       - type: git
         url: https://github.com/dail8859/NotepadNext.git
-        tag: v0.14
-        commit: 0c63b760ae82bb0eabbf070030454bae9df9ab5b
+        tag: v0.15
+        commit: fc4c807cf2b755b37d40de27cf29a5268c7c2fc5
         x-checker-data:
           type: git
           tag-pattern: ^v([\d.]+)$
 
       - type: git
         url: https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System.git
-        commit: 34b68d6eab1556cf851d24e033909332771f3dfe
+        commit: 023ce95934fecfd4cf5c672c9c404fabe0f54923
         dest: thirdparty/ads
       - type: git
         url: https://github.com/alex-spataru/QSimpleUpdater.git
-        commit: 8e7017f7fbdc2b4b1a26ed1eef9ebcba6a50639c
+        commit: c5c136c0f79ca6423b0914a2676ae3d0e3811c5b
         dest: thirdparty/QSimpleUpdater
       - type: git
         url: https://github.com/itay-grudev/SingleApplication.git
-        commit: 494772e98cef0aa88124f154feb575cc60b08b38
+        commit: a218603d76a55dddb65b84f2b49ecaa8efc074ea
         dest: thirdparty/SingleApplication
       - type: git
         url: https://github.com/editorconfig/editorconfig-core-qt.git
